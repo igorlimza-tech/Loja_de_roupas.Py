@@ -61,7 +61,24 @@ def ler_cpf(mensagem):
         print("CPF inválido. Tente novamente!")
 
 
+def ler_nome(mensagem):
+    while True:
+        nome = input(mensagem).strip()
+        
+        if nome and all(caractere.isalpha() or caractere.isspace()  for caractere in nome):
+            return nome
+        
+        print("Nome inválido! Digite apenas letras e espaços.")
 
+def ler_telefone(mensagem):
+    while True:
+        telefone = input(mensagem)
+        telefone = telefone.strip()
+        telefone = telefone.replace("(", "").replace(")","").replace("-","").replace(" ", "")
+        if len(telefone) == 10 or len(telefone) ==11 and telefone.isdigit():
+            return telefone
+        else:
+            print("Número de telefone inválido. Tente novamente!")
     
 
 

@@ -1,4 +1,4 @@
-from utilidades import ler_int, ler_cpf
+from utilidades import ler_int, ler_cpf, ler_nome, ler_telefone
 
 class Cliente:
     def __init__(self,cpf, nome, idade, telefone):
@@ -17,13 +17,15 @@ class Cliente:
 def cadastrar_cliente(lista_clientes):
     cpf = ler_cpf("CPF: ")
     cliente = busca_cliente_cpf(lista_clientes, cpf)
+    
     if cliente:
         print("CPF já cadastrado!")
         return
     
-    nome = input("Nome: ")
+    nome = ler_nome("Nome: ")
     idade = ler_int("Idade: ")             
-    telefone = input("Telefone: ")
+    telefone = ler_telefone("Telefone: ")
+    
     novo_cliente = Cliente(cpf, nome, idade, telefone)
     lista_clientes.append(novo_cliente) 
     print("Cliente cadastrado com sucesso!")

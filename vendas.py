@@ -27,24 +27,26 @@ def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
     if not cliente:
         print("Cliente não cadastrado. Tente novamente!")
         return
+    
     codigo_barras = input("Código de barras: ")
     produto = busca_produto_codigo(lista_estoque,codigo_barras)
     if not produto:
         print("Produto não cadastrado. Tente novamente!")
         return
+    
     quantidade = ler_int("Quantidade: ")
     if quantidade > produto.quantidade:
         print("Estoque insuficiente!")
         return
-    if quantidade <=0:
-        print("A quantidade deve ser maior que 0")
-        return
-    produto.quantidade -= quantidade
+    
     pagamento = menu_pagamento()
+    
     valor_total = (produto.valor * quantidade)
-    print(f"Valor da compra: R${valor_total}")
+    produto.quantidade -= quantidade
+    
     nova_venda = Venda(cliente, produto, quantidade, pagamento, valor_total)
     lista_vendas.append(nova_venda)
+    print(f"Venda realizada com sucesso! Valor da compra: R${valor_total:.2f}")
     
 def menu_pagamento():
     while True:
