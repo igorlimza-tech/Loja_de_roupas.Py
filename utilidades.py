@@ -75,11 +75,12 @@ def ler_telefone(mensagem):
         telefone = input(mensagem)
         telefone = telefone.strip()
         telefone = telefone.replace("(", "").replace(")","").replace("-","").replace(" ", "")
-        if len(telefone) == 10 or len(telefone) ==11 and telefone.isdigit():
+        if (len(telefone) == 10 or len(telefone) == 11) and telefone.isdigit():
             return telefone
         else:
             print("Número de telefone inválido. Tente novamente!")
     
-
+def linha():
+    print("-"*30)
 
 

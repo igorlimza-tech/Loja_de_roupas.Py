@@ -1,4 +1,4 @@
-from utilidades import ler_float, ler_int
+from utilidades import ler_float, ler_int, linha
 
 
 class Produto:
@@ -13,7 +13,7 @@ class Produto:
         print(f"Nome: {self.nome}")
         print(f"Valor: R$ {self.valor:.2f}")
         print(f"Quantidade em estoque: {self.quantidade}")
-        print("-"*30)
+        linha()
 
     
 def cadastrar_produtos(lista_estoque):

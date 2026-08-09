@@ -1,7 +1,6 @@
-from utilidades import ler_cpf, ler_int
+from utilidades import ler_cpf, ler_int, linha
 from clientes import busca_cliente_cpf
-from produtos import busca_produto_codigo
-
+from produtos import busca_produto_codigo, listar_estoque
 
 class Venda:
     def __init__(self,cliente, produto, quantidade, pagamento, valor_total):
@@ -28,20 +27,33 @@ def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
         print("Cliente não cadastrado. Tente novamente!")
         return
     
-    codigo_barras = input("Código de barras: ")
+    print("Produtos disponiveis")
+    linha()
+    listar_estoque(lista_estoque)
+    codigo_barras = input("Código de barras do produto que deseja escolher: ")
     produto = busca_produto_codigo(lista_estoque,codigo_barras)
+
     if not produto:
         print("Produto não cadastrado. Tente novamente!")
         return
+
+    print("produto selecionado:")
+    linha()
+    produto.exibir_produto()
     
     quantidade = ler_int("Quantidade: ")
     if quantidade > produto.quantidade:
         print("Estoque insuficiente!")
+        print(f"Quantidade disponível: {produto.quantidade}")
         return
-    
-    pagamento = menu_pagamento()
-    
+
     valor_total = (produto.valor * quantidade)
+
+    print(f"Valor Unitário: R$ {produto.valor:.2f}")
+    print(f"Valor Total: R$ {valor_total:.2f}")
+
+    pagamento = menu_pagamento()
+
     produto.quantidade -= quantidade
     
     nova_venda = Venda(cliente, produto, quantidade, pagamento, valor_total)
