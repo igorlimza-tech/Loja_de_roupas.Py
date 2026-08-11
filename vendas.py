@@ -1,21 +1,26 @@
-from utilidades import ler_cpf, ler_int, linha
+from utilidades import ler_cpf, ler_int, linha, ler_codigo, ler_sim_nao
 from clientes import busca_cliente_cpf
 from produtos import busca_produto_codigo, listar_estoque
 
-class Venda:
-    def __init__(self,cliente, produto, quantidade, pagamento, valor_total):
+class Venda():
+    def __init__(self,cliente, itens, pagamento, valor_total):
         self.cliente = cliente 
-        self.produto = produto     
-        self.quantidade = quantidade
+        self.itens = itens
         self.pagamento = pagamento
         self.valor_total = valor_total
      
      
     def exibir_venda(self):
-        print("-"*30)
+        linha()
         print(f"Cliente: {self.cliente.nome}")
-        print(f"Produto: {self.produto.nome}")
-        print(f"Quantidade: {self.quantidade}")
+        linha
+        for item in self.itens:
+            produto = item["Produto"]
+            print(f'Produto: {produto.nome}')
+            print(f"Valor Unitário: {produto.valor:.2f}")
+            print(f'Quantidade: {item["Quantidade"]}')
+            print(f'Subtotal: R$ {item["Subtotal"]:.2f}')
+        linha()
         print(f"Forma de pagamento: {self.pagamento}")
         print(f"Valor total da venda: R${self.valor_total:.2f}")
         
@@ -27,38 +32,83 @@ def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
         print("Cliente não cadastrado. Tente novamente!")
         return
     
-    print("Produtos disponiveis")
-    linha()
-    listar_estoque(lista_estoque)
-    codigo_barras = input("Código de barras do produto que deseja escolher: ")
-    produto = busca_produto_codigo(lista_estoque,codigo_barras)
-
-    if not produto:
-        print("Produto não cadastrado. Tente novamente!")
-        return
-
-    print("produto selecionado:")
-    linha()
-    produto.exibir_produto()
-    
-    quantidade = ler_int("Quantidade: ")
-    if quantidade > produto.quantidade:
-        print("Estoque insuficiente!")
-        print(f"Quantidade disponível: {produto.quantidade}")
-        return
-
-    valor_total = (produto.valor * quantidade)
-
-    print(f"Valor Unitário: R$ {produto.valor:.2f}")
-    print(f"Valor Total: R$ {valor_total:.2f}")
-
+    carrinho = montar_carrinho(lista_estoque)
+    valor_total = 0
+    for item in carrinho:
+        valor_total+=item["Subtotal"]
+     
     pagamento = menu_pagamento()
-
-    produto.quantidade -= quantidade
     
-    nova_venda = Venda(cliente, produto, quantidade, pagamento, valor_total)
+    for item in carrinho:
+        produto = item["Produto"]
+        quantidade = item["Quantidade"]
+        produto.quantidade -= quantidade
+        
+    nova_venda = Venda(cliente, carrinho, pagamento, valor_total)
     lista_vendas.append(nova_venda)
     print(f"Venda realizada com sucesso! Valor da compra: R${valor_total:.2f}")
+
+
+def montar_carrinho(lista_estoque):
+    carrinho = []
+        
+    while True:
+        print("===== PRODUTOS DISPONIVEIS =====")
+        listar_estoque(lista_estoque)
+        
+        codigo_barras = ler_codigo("Código do produto que deseja selecionar: ")
+        produto = busca_produto_codigo(lista_estoque,codigo_barras)
+        
+        if not produto:
+            print("Produto não cadastrado. Tente novamente!")
+            continue
+        
+        print("produto selecionado:")
+        linha()
+        produto.exibir_produto()
+            
+        quantidade = ler_int("Quantidade: ")
+        
+        if quantidade > produto.quantidade:
+            print("Estoque insuficiente!")
+            print(f"Quantidade disponível: {produto.quantidade}")
+            continue
+        
+        produto_existe = False
+        quantidade_invalida = False
+
+        for item in carrinho:
+            if item["Produto"] == produto:
+                produto_existe = True
+                
+                if item["Quantidade"] + quantidade > produto.quantidade:
+                    print("Quantidade solicitada ultrapassa o estoque disponível.")
+                    quantidade_invalida = True
+                    break
+                else:
+                    item["Quantidade"] += quantidade
+                    item["Subtotal"]= item["Produto"].valor * item["Quantidade"]
+                    break
+       
+                
+        if quantidade_invalida:
+            continue
+                
+        
+        if not produto_existe:                    
+            item = {"Produto": produto,
+                    "Quantidade": quantidade,
+                    "Subtotal": produto.valor * quantidade }
+        
+            carrinho.append(item)
+        
+        opcao = ler_sim_nao("Deseja escolher mais produtos? [S/N]: ")
+        if opcao == "S":
+            continue
+    
+        return carrinho
+        
+    
     
 def menu_pagamento():
     while True:

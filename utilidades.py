@@ -69,7 +69,30 @@ def ler_nome(mensagem):
             return nome
         
         print("Nome inválido! Digite apenas letras e espaços.")
+        
 
+def ler_nome_produto(mensagem):
+    while True:
+        nome_produto = input(mensagem).strip()
+        
+        if nome_produto and any(caractere.isalpha() for caractere in nome_produto):
+            return nome_produto
+        
+        print("Nome inválido. Tente novamente")
+
+
+def ler_codigo(mensagem):
+    while True:
+        codigo = input(mensagem).strip()
+        if len(codigo) not in (8,12,13,14):
+            print("O tamanho do código está incorreto")
+            continue
+        if not codigo.isdigit():
+            print("Digite apenas números no código de barras")
+            continue
+        return codigo
+        
+        
 def ler_telefone(mensagem):
     while True:
         telefone = input(mensagem)
@@ -77,9 +100,17 @@ def ler_telefone(mensagem):
         telefone = telefone.replace("(", "").replace(")","").replace("-","").replace(" ", "")
         if (len(telefone) == 10 or len(telefone) == 11) and telefone.isdigit():
             return telefone
-        else:
-            print("Número de telefone inválido. Tente novamente!")
-    
+        
+        print("Número de telefone inválido. Tente novamente!")
+        
+
+def ler_sim_nao(mensagem):
+    while True:
+        opcao = input(mensagem).strip().upper()
+        if opcao == "S" or opcao == "N":
+            return opcao
+        print("Opção inválida. Digite apenas S ou N ")     
+               
 def linha():
     print("-"*30)
 

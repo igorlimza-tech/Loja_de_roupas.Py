@@ -1,4 +1,4 @@
-from utilidades import ler_float, ler_int, linha
+from utilidades import ler_float, ler_int, linha, ler_codigo, ler_nome_produto
 
 
 class Produto:
@@ -17,12 +17,12 @@ class Produto:
 
     
 def cadastrar_produtos(lista_estoque):
-    codigo_barras = input("Código: ")
+    codigo_barras = ler_codigo("Código: ")
     produto = busca_produto_codigo(lista_estoque,codigo_barras)
     if produto:
         print("Código de barras já cadastrado!")
         return
-    nome = input("Nome do produto: ")
+    nome = ler_nome_produto("Nome do produto: ")
     valor = ler_float("Valor: ")
     quantidade = ler_int("Quantidade: ")
     
