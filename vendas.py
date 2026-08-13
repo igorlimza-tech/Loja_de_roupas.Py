@@ -1,6 +1,6 @@
 from utilidades import ler_cpf, ler_int, linha, ler_codigo, ler_sim_nao
 from clientes import busca_cliente_cpf
-from produtos import busca_produto_codigo, listar_estoque
+from produtos import busca_produto_codigo, listar_estoque 
 
 class Venda():
     def __init__(self,cliente, itens, pagamento, valor_total):
@@ -42,7 +42,7 @@ def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
     for item in carrinho:
         produto = item["Produto"]
         quantidade = item["Quantidade"]
-        produto.quantidade -= quantidade
+        produto.baixar_estoque(quantidade)
         
     nova_venda = Venda(cliente, carrinho, pagamento, valor_total)
     lista_vendas.append(nova_venda)

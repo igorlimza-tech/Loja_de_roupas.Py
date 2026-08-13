@@ -14,6 +14,16 @@ class Produto:
         print(f"Valor: R$ {self.valor:.2f}")
         print(f"Quantidade em estoque: {self.quantidade}")
         linha()
+    
+    
+    def baixar_estoque(self, quantidade):
+        if quantidade > self.quantidade:
+            print("A quantidade retirada não pode ser maior que a do estoque!")
+            return
+        if quantidade <=0:
+            print("Retire uma quantidade maior que 0!")
+            return    
+        self.quantidade -= quantidade 
 
     
 def cadastrar_produtos(lista_estoque):
