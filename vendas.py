@@ -1,6 +1,6 @@
 from utilidades import ler_cpf, ler_int, linha, ler_codigo, ler_sim_nao
 from clientes import busca_cliente_cpf
-from produtos import busca_produto_codigo, listar_estoque 
+from produtos import busca_produto_codigo, listar_estoque
 
 class Venda():
     def __init__(self,cliente, itens, pagamento, valor_total):
@@ -13,11 +13,11 @@ class Venda():
     def exibir_venda(self):
         linha()
         print(f"Cliente: {self.cliente.nome}")
-        linha
+        linha()
         for item in self.itens:
             produto = item["Produto"]
             print(f'Produto: {produto.nome}')
-            print(f"Valor Unitário: {produto.valor:.2f}")
+            print(f'Valor Unitário: {item["Preco_Unitario"]:.2f}')
             print(f'Quantidade: {item["Quantidade"]}')
             print(f'Subtotal: R$ {item["Subtotal"]:.2f}')
         linha()
@@ -26,6 +26,13 @@ class Venda():
         
             
 def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
+    if not lista_clientes:
+        print("Cliente não cadastrado. Tente novamente!")
+        return
+    if not lista_estoque:
+        print("Nenhum produto cadastrado no estoque! ")
+        return
+    
     cpf = ler_cpf("CPF: ")
     cliente = busca_cliente_cpf(lista_clientes, cpf)
     if not cliente:
@@ -87,7 +94,7 @@ def montar_carrinho(lista_estoque):
                     break
                 else:
                     item["Quantidade"] += quantidade
-                    item["Subtotal"]= item["Produto"].valor * item["Quantidade"]
+                    item["Subtotal"]= item["Preco_unitario"] * item["Quantidade"]
                     break
        
                 
@@ -98,6 +105,7 @@ def montar_carrinho(lista_estoque):
         if not produto_existe:                    
             item = {"Produto": produto,
                     "Quantidade": quantidade,
+                    "Preco_Unitario": produto.valor,
                     "Subtotal": produto.valor * quantidade }
         
             carrinho.append(item)

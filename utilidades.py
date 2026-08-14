@@ -115,3 +115,5 @@ def linha():
     print("-"*30)
 
 
+def pausar():
+    input("\nPressione ENTER para continuar...")

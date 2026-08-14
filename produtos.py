@@ -23,7 +23,22 @@ class Produto:
         if quantidade <=0:
             print("Retire uma quantidade maior que 0!")
             return    
-        self.quantidade -= quantidade 
+        self.quantidade -= quantidade
+
+
+    def adicionar_estoque(self, quantidade):
+        if quantidade <=0:
+            print("Adicione uma quantidade maior que 0!")
+            return
+        self.quantidade += quantidade
+
+
+    def alterar_preco(self,preco):
+        if preco <=0:
+            print("Insira um valor maior que 0")
+            return
+        self.valor = preco
+        
 
     
 def cadastrar_produtos(lista_estoque):
@@ -39,6 +54,28 @@ def cadastrar_produtos(lista_estoque):
     novo_produto = Produto(codigo_barras, nome, valor, quantidade)
     lista_estoque.append(novo_produto)
     print("Produto cadastrado com sucesso!")
+
+
+def adicionar_estoque(lista_estoque):
+    codigo_barras = ler_codigo("Código do produto: ")
+    produto = busca_produto_codigo(lista_estoque, codigo_barras)
+    if not produto:
+        print("Produto não cadastrado!")
+        return
+    quantidade = ler_int("Quantidade a adicionar:")
+    produto.adicionar_estoque(quantidade)
+    print("Estoque atualizado com sucesso!")
+
+
+def alterar_preco(lista_estoque):
+    codigo_barras = ler_codigo("Código do produto: ")
+    produto = busca_produto_codigo(lista_estoque, codigo_barras)
+    if not produto:
+        print("Produto não cadastrado!")
+        return
+    novo_preco = ler_float("Qual o novo preço: R$ ") 
+    produto.alterar_preco(novo_preco)
+    print("Valor alterado com sucesso!")  
 
 
 def listar_estoque(lista_estoque):
