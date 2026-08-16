@@ -1,14 +1,14 @@
 from utilidades import ler_int, pausar
 from clientes import cadastrar_cliente, listar_clientes
 from produtos import cadastrar_produtos, listar_estoque, alterar_preco, adicionar_estoque
-from vendas import  cadastrar_venda, listar_vendas
+from vendas import cadastrar_venda, listar_vendas
 
 def menu():
-    print(("="*10)+ " lOJA DE ROUPAS.PY " +("="*10))
+    print(("=" * 10) + " LOJA DE ROUPAS.PY " + ("=" * 10))
     print("1- Cadastrar cliente")
-    print("2- listar clientes")
+    print("2- Listar clientes")
     print("3- Cadastrar produto")
-    print("4- listar estoque")
+    print("4- Listar estoque")
     print("5- Realizar venda")
     print("6- Listar vendas")
     print("7- Gerenciamento do estoque") 
@@ -20,6 +20,7 @@ def sub_menu():
     print("1- Adicionar produtos ao estoque")
     print("2- Alterar valor do produto")
     print("3- Voltar ao menu principal")
+
 
 def main():                    
     lista_clientes = []

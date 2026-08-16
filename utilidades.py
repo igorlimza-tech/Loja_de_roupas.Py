@@ -80,7 +80,7 @@ def ler_nome_produto(mensagem):
         if nome_produto and any(caractere.isalpha() for caractere in nome_produto):
             return nome_produto
         
-        print("Nome inválido. Tente novamente")
+        print("Nome inválido. Tente novamente!")
 
 
 def ler_codigo(mensagem):
@@ -109,7 +109,7 @@ def ler_telefone(mensagem):
 def ler_sim_nao(mensagem):
     while True:
         opcao = input(mensagem).strip().upper()
-        if opcao == "S" or opcao == "N":
+        if opcao in ("S","N"):
             return opcao
         print("Opção inválida. Digite apenas S ou N ")     
 
@@ -121,7 +121,7 @@ def ler_data(mensagem):
             data = datetime.strptime(data_nascimento, "%d/%m/%Y")
             return data.date()
         except ValueError:
-            print("Data de nascimento inválida. Digite nesse formato DD/MM/AAAA")           
+            print("Data de nascimento inválida. Digite no formato DD/MM/AAAA")           
         
     
 def linha():

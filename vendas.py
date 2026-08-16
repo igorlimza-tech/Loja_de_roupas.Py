@@ -1,16 +1,16 @@
 from datetime import datetime
-from utilidades import ler_cpf, ler_int, linha, ler_codigo, ler_sim_nao
+from utilidades import ler_cpf, ler_int, linha, ler_sim_nao
 from clientes import busca_cliente_cpf
-from produtos import busca_produto_codigo, listar_estoque
+from produtos import selecionar_produto
 
 class Venda():
-    def __init__(self,cliente, itens, pagamento, valor_total):
+    def __init__(self, cliente, itens, pagamento, valor_total):
         self.cliente = cliente 
         self.itens = itens
         self.pagamento = pagamento
         self.valor_total = valor_total
         self.data_compra = datetime.now()
-     
+
     def exibir_venda(self):
         linha()
         print(f"Cliente: {self.cliente.nome}")
@@ -22,14 +22,14 @@ class Venda():
             print(f'Quantidade: {item["Quantidade"]}')
             print(f'Subtotal: R$ {item["Subtotal"]:.2f}')
         linha()
-        print(f"Data e hora da compra {self.data_compra.strftime('%d/%m/%Y %H:%M')}")
+        print(f"Data e hora da compra: {self.data_compra.strftime('%d/%m/%Y %H:%M')}")
         print(f"Forma de pagamento: {self.pagamento}")
-        print(f"Valor total da venda: R${self.valor_total:.2f}")
+        print(f"Valor total da venda: R$ {self.valor_total:.2f}")
         
             
 def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
     if not lista_clientes:
-        print("Cliente não cadastrado. Tente novamente!")
+        print("Nenhum cliente cadastrado!")
         return
     if not lista_estoque:
         print("Nenhum produto cadastrado no estoque! ")
@@ -44,7 +44,7 @@ def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
     carrinho = montar_carrinho(lista_estoque)
     valor_total = 0
     for item in carrinho:
-        valor_total+=item["Subtotal"]
+        valor_total += item["Subtotal"]
      
     pagamento = menu_pagamento()
     
@@ -60,19 +60,8 @@ def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
 
 def montar_carrinho(lista_estoque):
     carrinho = []
-        
     while True:
-        print("===== PRODUTOS DISPONIVEIS =====")
-        listar_estoque(lista_estoque)
-        
-        codigo_barras = ler_codigo("Código do produto que deseja selecionar: ")
-        produto = busca_produto_codigo(lista_estoque,codigo_barras)
-        
-        if not produto:
-            print("Produto não cadastrado. Tente novamente!")
-            continue
-        
-        print("produto selecionado:")
+        produto = selecionar_produto(lista_estoque)    
         linha()
         produto.exibir_produto()
             
@@ -85,7 +74,6 @@ def montar_carrinho(lista_estoque):
         
         produto_existe = False
         quantidade_invalida = False
-
         for item in carrinho:
             if item["Produto"] == produto:
                 produto_existe = True
@@ -96,9 +84,9 @@ def montar_carrinho(lista_estoque):
                     break
                 else:
                     item["Quantidade"] += quantidade
-                    item["Subtotal"]= item["Preco_Unitario"] * item["Quantidade"]
+                    item["Subtotal"] = item["Preco_Unitario"] * item["Quantidade"]
                     break
-       
+        
                 
         if quantidade_invalida:
             continue
@@ -115,11 +103,10 @@ def montar_carrinho(lista_estoque):
         opcao = ler_sim_nao("Deseja escolher mais produtos? [S/N]: ")
         if opcao == "S":
             continue
-    
+
         return carrinho
+            
         
-    
-    
 def menu_pagamento():
     while True:
         print(("="*10)+ " FORMA DE PAGAMENTO " +("="*10))

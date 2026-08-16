@@ -1,20 +1,22 @@
-# 👕 Loja de Roupas
+# 👕 Loja de Roupas.py
 
-> Sistema de gerenciamento de uma loja de roupas desenvolvido em **Python**, com foco em **Programação Orientada a Objetos, modularização, validação de dados e boas práticas de desenvolvimento**.
+> Sistema de gerenciamento de uma loja de roupas desenvolvido em **Python**, com foco em **Programação Orientada a Objetos (POO), modularização, validação de dados e organização de código**.
 
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge\&logo=git\&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge\&logo=github\&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
 ---
 
 ## 📌 Sobre o projeto
 
-O **Loja de Roupas** é um sistema desenvolvido em Python para simular operações básicas de uma loja através do terminal.
+O **Loja de Roupas.py** é um sistema desenvolvido em Python que simula operações básicas de gerenciamento de uma loja através do terminal.
 
-O projeto foi criado como parte da minha evolução nos estudos de **Python e Programação Orientada a Objetos**, permitindo colocar em prática conceitos como classes, objetos, métodos, funções, modularização, validação de dados e organização de código.
+O projeto foi criado como parte da minha evolução nos estudos de **Python e Programação Orientada a Objetos**, colocando em prática conceitos como classes, objetos, métodos, funções, modularização, validação de dados, tratamento de erros e separação de responsabilidades.
 
-O desenvolvimento está sendo realizado de forma incremental, adicionando novas funcionalidades e aprimorando a estrutura do sistema conforme avanço nos estudos.
+O sistema permite gerenciar clientes e produtos, controlar o estoque, montar carrinhos com múltiplos itens e registrar vendas.
+
+Atualmente, os dados são mantidos em memória durante a execução do programa. A persistência dos dados será implementada futuramente através da integração com banco de dados.
 
 ---
 
@@ -22,67 +24,144 @@ O desenvolvimento está sendo realizado de forma incremental, adicionando novas 
 
 ### 👤 Gerenciamento de clientes
 
-* Cadastro de clientes
-* Validação de CPF
-* Validação de nome
-* Validação de telefone
-* Verificação de CPF já cadastrado
-* Listagem de clientes
+- Cadastro de clientes
+- Validação de CPF
+- Verificação de CPF já cadastrado
+- Validação de nome
+- Validação de telefone
+- Registro e validação da data de nascimento
+- Listagem de clientes
 
 ### 👕 Gerenciamento de produtos
 
-* Cadastro de produtos
-* Código de barras
-* Nome do produto
-* Valor
-* Quantidade em estoque
-* Verificação de código de barras duplicado
-* Listagem do estoque
+- Cadastro de produtos
+- Validação de código de barras
+- Verificação de código de barras duplicado
+- Cadastro de nome, preço e quantidade
+- Listagem do estoque
+- Busca de produtos por código de barras
+- Busca de produtos por nome
+- Busca parcial por nome
+- Seleção entre múltiplos produtos encontrados
+- Reposição de estoque
+- Alteração do preço do produto
 
-### 🛒 Gerenciamento de vendas
+### 🔎 Busca de produtos
 
-* Identificação do cliente por CPF
-* Identificação do produto por código de barras
-* Definição da quantidade de produtos
-* Verificação de estoque disponível
-* Atualização automática do estoque
-* Cálculo do valor total
-* Registro da forma de pagamento
-* Listagem das vendas realizadas
+Durante uma venda ou operação de gerenciamento, o sistema permite escolher entre:
+
+```text
+1- Buscar por nome
+2- Buscar por código
+```
+
+Na busca por nome, não é necessário informar o nome completo.
+
+Por exemplo, pesquisando:
+
+```text
+camisa
+```
+
+o sistema pode apresentar:
+
+```text
+1 - Camisa Social
+2 - Camisa Polo
+3 - Camisa Esportiva
+```
+
+O usuário pode então selecionar o produto desejado.
+
+### 🛒 Carrinho e vendas
+
+- Identificação do cliente através do CPF
+- Carrinho com múltiplos produtos
+- Adição de diferentes produtos na mesma venda
+- Controle de produtos repetidos no carrinho
+- Atualização da quantidade de um produto já adicionado
+- Verificação do estoque disponível
+- Bloqueio de quantidades superiores ao estoque
+- Cálculo automático do subtotal
+- Cálculo do valor total da compra
+- Atualização automática do estoque após a venda
+- Registro da forma de pagamento
+- Registro automático da data e hora da compra
+- Histórico das vendas realizadas
+
+### 💰 Histórico de preços
+
+O sistema preserva o **preço praticado no momento da venda**.
+
+Isso significa que, caso o preço de um produto seja alterado posteriormente, as vendas anteriores continuam exibindo o valor que foi utilizado quando aquela venda aconteceu.
+
+Exemplo:
+
+```text
+Venda realizada:
+Camisa - R$ 50,00
+
+Preço alterado posteriormente:
+Camisa - R$ 65,00
+
+Histórico da venda:
+Camisa - R$ 50,00
+```
+
+### 📦 Gerenciamento de estoque
+
+O sistema possui um submenu específico para gerenciamento:
+
+```text
+=== GERENCIAMENTO DO ESTOQUE ===
+1- Adicionar produtos ao estoque
+2- Alterar valor do produto
+3- Voltar ao menu principal
+```
+
+As operações utilizam a mesma busca por **nome ou código de barras** disponível durante as vendas.
 
 ### 💳 Formas de pagamento
 
-* Dinheiro
-* Cartão de débito
-* Cartão de crédito
-* Pix
+- Dinheiro
+- Cartão de débito
+- Cartão de crédito
+- Pix
 
 ---
 
 ## 🧠 Conceitos aplicados
 
-O desenvolvimento do projeto permite praticar diferentes conceitos da linguagem Python:
+Durante o desenvolvimento foram utilizados diversos conceitos da linguagem Python:
 
-* **Programação Orientada a Objetos (POO)**
-* Classes e objetos
-* Construtores (`__init__`)
-* Atributos e métodos
-* Funções
-* Modularização
-* Listas e iteração
-* Estruturas condicionais
-* Estruturas de repetição
-* Tratamento de exceções
-* Validação de dados
-* Busca de objetos
-* Organização de responsabilidades entre módulos
+- **Programação Orientada a Objetos (POO)**
+- Classes e objetos
+- Construtores (`__init__`)
+- Atributos
+- Métodos
+- Funções
+- Modularização
+- Listas
+- Dicionários
+- Iteração
+- `enumerate()`
+- Estruturas condicionais
+- Estruturas de repetição
+- Tratamento de exceções
+- Validação de dados
+- Busca de objetos
+- Manipulação de strings
+- Uso de `datetime`
+- Separação de responsabilidades
+- Reutilização de código
+- Refatoração
 
 ---
 
 ## 🏗️ Estrutura do projeto
 
 ```text
-Loja-de-Roupas/
+Loja_de_roupas.Py/
 │
 ├── main.py
 ├── clientes.py
@@ -94,59 +173,100 @@ Loja-de-Roupas/
 
 ### `main.py`
 
-Responsável pelo fluxo principal da aplicação e pelo menu de interação com o usuário.
+Responsável pelo fluxo principal da aplicação, menu principal e submenu de gerenciamento do estoque.
+
+O programa é iniciado através de:
+
+```python
+if __name__ == "__main__":
+    main()
+```
 
 ### `clientes.py`
 
-Responsável pelo gerenciamento dos clientes e contém a classe `Cliente`.
+Contém a classe `Cliente` e as funcionalidades relacionadas ao cadastro, busca e listagem dos clientes.
 
 ### `produtos.py`
 
-Responsável pelo gerenciamento dos produtos e do estoque, contendo a classe `Produto`.
+Contém a classe `Produto` e as funcionalidades relacionadas ao cadastro, busca e gerenciamento dos produtos e estoque.
+
+Também centraliza a seleção de produtos através da função:
+
+```python
+selecionar_produto()
+```
+
+permitindo reutilizar a mesma lógica de busca em diferentes partes do sistema.
 
 ### `vendas.py`
 
-Responsável pelo registro das vendas e contém a classe `Venda`.
+Contém a classe `Venda` e é responsável por:
+
+- montagem do carrinho;
+- cálculo dos valores;
+- formas de pagamento;
+- atualização do estoque;
+- registro das vendas;
+- histórico de vendas.
 
 ### `utilidades.py`
 
-Centraliza funções reutilizáveis para entrada e validação de dados:
+Centraliza funções reutilizáveis de leitura, validação e apoio ao sistema:
 
 ```text
 ler_int()
 ler_float()
+validar_cpf()
 ler_cpf()
 ler_nome()
+ler_nome_produto()
+ler_codigo()
 ler_telefone()
+ler_sim_nao()
+ler_data()
+linha()
+pausar()
 ```
 
 ---
 
 ## 🔐 Validação de dados
 
-Uma das partes trabalhadas no projeto é a criação de funções específicas para validar entradas fornecidas pelo usuário.
-
 ### CPF
 
 A validação realiza:
 
-* Limpeza da formatação;
-* Verificação da quantidade de dígitos;
-* Verificação se contém apenas números;
-* Bloqueio de CPFs com todos os dígitos iguais;
-* Cálculo e validação dos dois dígitos verificadores.
+- remoção da formatação;
+- verificação da quantidade de dígitos;
+- verificação de caracteres numéricos;
+- bloqueio de CPFs com todos os dígitos iguais;
+- cálculo do primeiro dígito verificador;
+- cálculo do segundo dígito verificador.
 
-### Nome
+### 📅 Data de nascimento
 
-A função `ler_nome()` verifica se:
+A data é informada no formato:
 
-* O campo não está vazio;
-* O nome contém apenas letras e espaços;
-* Caracteres acentuados são aceitos.
+```text
+DD/MM/AAAA
+```
 
-### Telefone
+O sistema utiliza `datetime.strptime()` para verificar se a data realmente existe.
 
-A função `ler_telefone()` aceita telefones com **10 ou 11 dígitos** e permite que o usuário informe formatos como:
+Exemplos:
+
+```text
+15/08/2002 → válido
+31/02/2002 → inválido
+```
+
+Internamente, a data é armazenada como um objeto `date`.
+
+### 📞 Telefone
+
+São aceitos telefones com **10 ou 11 dígitos**.
+
+Exemplos:
 
 ```text
 (11) 99999-9999
@@ -156,11 +276,22 @@ A função `ler_telefone()` aceita telefones com **10 ou 11 dígitos** e permite
 
 A formatação é removida antes da validação.
 
+### 🏷️ Código de barras
+
+O código deve:
+
+- conter somente números;
+- possuir tamanho compatível com os formatos aceitos pelo sistema.
+
+São aceitos códigos com:
+
+```text
+8, 12, 13 ou 14 dígitos
+```
+
 ---
 
-## 🖥️ Funcionamento
-
-O sistema utiliza uma interface simples através do terminal.
+## 🖥️ Menu principal
 
 ```text
 ========== LOJA DE ROUPAS.PY ==========
@@ -170,34 +301,33 @@ O sistema utiliza uma interface simples através do terminal.
 4- Listar estoque
 5- Realizar venda
 6- Listar vendas
-7- Sair do Programa
+7- Gerenciamento do estoque
+8- Sair do Programa
 ```
-
-O usuário escolhe uma opção e o sistema executa a operação correspondente.
 
 ---
 
 ## 🔄 Fluxo básico
 
 ```text
-              ┌──────────────┐
-              │    main.py   │
-              └──────┬───────┘
-                     │
-          ┌──────────┼──────────┐
-          ▼          ▼          ▼
-     ┌─────────┐ ┌─────────┐ ┌─────────┐
-     │Clientes │ │Produtos │ │ Vendas  │
-     └────┬────┘ └────┬────┘ └────┬────┘
-          │           │           │
-          └───────────┼───────────┘
-                      ▼
-              ┌──────────────┐
-              │ utilidades.py│
-              └──────────────┘
+                    ┌──────────────┐
+                    │   main.py    │
+                    └──────┬───────┘
+                           │
+             ┌─────────────┼─────────────┐
+             ▼             ▼             ▼
+        ┌─────────┐   ┌─────────┐   ┌─────────┐
+        │Clientes │   │Produtos │   │ Vendas  │
+        └────┬────┘   └────┬────┘   └────┬────┘
+             │             │             │
+             └─────────────┼─────────────┘
+                           ▼
+                    ┌──────────────┐
+                    │utilidades.py │
+                    └──────────────┘
 ```
 
-A ideia é separar as responsabilidades do sistema em diferentes módulos, evitando concentrar toda a lógica em um único arquivo.
+A divisão em módulos permite separar as responsabilidades do sistema e evita concentrar toda a lógica em um único arquivo.
 
 ---
 
@@ -205,22 +335,22 @@ A ideia é separar as responsabilidades do sistema em diferentes módulos, evita
 
 ### Pré-requisitos
 
-* Python 3.x
-* Git
+- Python 3.x
+- Git
 
 ### Clone o repositório
 
 ```bash
-git clone URL_DO_SEU_REPOSITORIO
+git clone https://github.com/igorlimza-tech/Loja_de_roupas.Py.git
 ```
 
-### Acesse a pasta
+### Entre na pasta
 
 ```bash
-cd Loja-de-Roupas
+cd Loja_de_roupas.Py
 ```
 
-### Execute o programa
+### Execute
 
 ```bash
 python main.py
@@ -230,59 +360,82 @@ python main.py
 
 ## 🚀 Roadmap
 
-O projeto continuará evoluindo conforme novos conceitos forem estudados.
+### Versão 1.0
 
-### Atualmente
+- [x] Cadastro de clientes
+- [x] Validação de CPF
+- [x] Validação de nome
+- [x] Validação de telefone
+- [x] Validação de data de nascimento
+- [x] Cadastro de produtos
+- [x] Validação de código de barras
+- [x] Controle de estoque
+- [x] Reposição de estoque
+- [x] Alteração de preço
+- [x] Busca de produtos por nome
+- [x] Busca de produtos por código
+- [x] Carrinho com múltiplos produtos
+- [x] Registro de vendas
+- [x] Histórico de preços das vendas
+- [x] Registro de data e hora
+- [x] Formas de pagamento
+- [x] Organização em módulos
+- [x] Programação Orientada a Objetos
 
-* [x] Cadastro de clientes
-* [x] Validação de CPF
-* [x] Validação de nome
-* [x] Validação de telefone
-* [x] Cadastro de produtos
-* [x] Controle de estoque
-* [x] Registro de vendas
-* [x] Formas de pagamento
-* [x] Organização em módulos
-* [x] Programação Orientada a Objetos
+### 🔮 Próximas versões
 
-### Próximas etapas
-
-* [ ] Melhorar as validações
-* [ ] Implementar edição de clientes
-* [ ] Implementar exclusão de clientes
-* [ ] Implementar edição de produtos
-* [ ] Implementar exclusão de produtos
-* [ ] Adicionar persistência de dados
-* [ ] Integrar com MySQL
-* [ ] Implementar testes automatizados
-* [ ] Adicionar relatórios de vendas
-* [ ] Melhorar a interface do sistema
+- [ ] Persistência de dados
+- [ ] Integração com MySQL
+- [ ] Alteração de dados dos clientes
+- [ ] Exclusão de clientes
+- [ ] Alteração do nome de produtos
+- [ ] Exclusão de produtos
+- [ ] Preservação do nome histórico do produto nas vendas
+- [ ] Testes automatizados
+- [ ] Relatórios de vendas
+- [ ] Melhorias na interface do terminal
 
 ---
 
 ## 📚 Aprendizados
 
-Este projeto está sendo utilizado como uma aplicação prática dos conhecimentos adquiridos durante meus estudos de Python.
+Este projeto representa uma aplicação prática dos conhecimentos adquiridos durante meus estudos de Python.
 
-Além de desenvolver funcionalidades, o projeto também tem como objetivo praticar:
+Ao longo do desenvolvimento, foram trabalhados principalmente:
 
-* Organização de projetos;
-* Separação de responsabilidades;
-* Reutilização de código;
-* Tratamento de erros;
-* Validação de entradas;
-* Controle de versões com Git;
-* Evolução incremental de software.
+- organização de projetos;
+- Programação Orientada a Objetos;
+- separação de responsabilidades;
+- reutilização de código;
+- refatoração;
+- tratamento de erros;
+- validação de entradas;
+- manipulação de datas;
+- modelagem de regras de negócio;
+- controle de estoque;
+- construção de carrinho de compras;
+- controle de versões com Git e GitHub;
+- evolução incremental de software.
+
+Uma das principais evoluções durante o desenvolvimento foi a refatoração da seleção de produtos.
+
+A lógica de busca, que inicialmente estava diretamente dentro do fluxo de vendas, foi separada em uma função reutilizável:
+
+```python
+selecionar_produto()
+```
+
+Essa função passou a ser utilizada tanto nas vendas quanto nas operações de gerenciamento do estoque, reduzindo duplicação de código.
 
 ---
 
 ## 🛠️ Tecnologias
 
-| Tecnologia | Utilização                            |
-| ---------- | ------------------------------------- |
-| 🐍 Python  | Desenvolvimento da aplicação          |
-| 📦 Git     | Controle de versão                    |
-| 🐙 GitHub  | Versionamento e hospedagem do projeto |
+| Tecnologia | Utilização |
+| --- | --- |
+| 🐍 Python | Desenvolvimento da aplicação |
+| 📦 Git | Controle de versão |
+| 🐙 GitHub | Hospedagem e versionamento do projeto |
 
 ---
 
@@ -290,7 +443,7 @@ Além de desenvolver funcionalidades, o projeto também tem como objetivo pratic
 
 **Igor Lima**
 
-Estudante de **Análise e Desenvolvimento de Sistemas**, atualmente aprofundando meus conhecimentos em **Python, Programação Orientada a Objetos, bancos de dados e desenvolvimento de software**.
+Estudante de **Análise e Desenvolvimento de Sistemas**, aprofundando conhecimentos em **Python, Programação Orientada a Objetos, bancos de dados e desenvolvimento de software**.
 
 Este projeto representa parte da minha evolução prática na área de desenvolvimento.
 
