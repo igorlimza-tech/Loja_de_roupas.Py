@@ -1,16 +1,16 @@
-from utilidades import ler_int, ler_cpf, ler_nome, ler_telefone
+from utilidades import ler_cpf, ler_nome, ler_telefone, ler_data
 
 class Cliente:
-    def __init__(self,cpf, nome, idade, telefone):
+    def __init__(self,cpf, nome, data_nascimento, telefone):
         self.cpf = cpf
         self.nome = nome
-        self.idade = idade
+        self.data_nascimento = data_nascimento
         self.telefone = telefone
     
     def exibir_dados(self):
         print(f"CPF: {self.cpf}")
         print(f"Nome: {self.nome} ")
-        print(f"Idade: {self.idade} ")
+        print(f"Data de nascimento: {self.data_nascimento.strftime('%d/%m/%Y')} ")
         print(f"Telefone: {self.telefone}")
     
     
@@ -23,10 +23,10 @@ def cadastrar_cliente(lista_clientes):
         return
     
     nome = ler_nome("Nome: ")
-    idade = ler_int("Idade: ")             
+    data_nascimento = ler_data("Data de nascimento: ")             
     telefone = ler_telefone("Telefone: ")
     
-    novo_cliente = Cliente(cpf, nome, idade, telefone)
+    novo_cliente = Cliente(cpf, nome, data_nascimento, telefone)
     lista_clientes.append(novo_cliente) 
     print("Cliente cadastrado com sucesso!")
     

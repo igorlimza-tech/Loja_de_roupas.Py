@@ -1,3 +1,5 @@
+from datetime import datetime 
+
 def ler_int(mensagem):
     while True:
         try: 
@@ -110,7 +112,18 @@ def ler_sim_nao(mensagem):
         if opcao == "S" or opcao == "N":
             return opcao
         print("Opção inválida. Digite apenas S ou N ")     
-               
+
+
+def ler_data(mensagem):
+    while True:
+        data_nascimento = input(mensagem).strip()
+        try:
+            data = datetime.strptime(data_nascimento, "%d/%m/%Y")
+            return data.date()
+        except ValueError:
+            print("Data de nascimento inválida. Digite nesse formato DD/MM/AAAA")           
+        
+    
 def linha():
     print("-"*30)
 

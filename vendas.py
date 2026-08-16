@@ -1,3 +1,4 @@
+from datetime import datetime
 from utilidades import ler_cpf, ler_int, linha, ler_codigo, ler_sim_nao
 from clientes import busca_cliente_cpf
 from produtos import busca_produto_codigo, listar_estoque
@@ -8,7 +9,7 @@ class Venda():
         self.itens = itens
         self.pagamento = pagamento
         self.valor_total = valor_total
-     
+        self.data_compra = datetime.now()
      
     def exibir_venda(self):
         linha()
@@ -17,10 +18,11 @@ class Venda():
         for item in self.itens:
             produto = item["Produto"]
             print(f'Produto: {produto.nome}')
-            print(f'Valor Unitário: {item["Preco_Unitario"]:.2f}')
+            print(f'Valor Unitário: R$ {item["Preco_Unitario"]:.2f}')
             print(f'Quantidade: {item["Quantidade"]}')
             print(f'Subtotal: R$ {item["Subtotal"]:.2f}')
         linha()
+        print(f"Data e hora da compra {self.data_compra.strftime('%d/%m/%Y %H:%M')}")
         print(f"Forma de pagamento: {self.pagamento}")
         print(f"Valor total da venda: R${self.valor_total:.2f}")
         
@@ -53,7 +55,7 @@ def cadastrar_venda(lista_vendas, lista_clientes, lista_estoque):
         
     nova_venda = Venda(cliente, carrinho, pagamento, valor_total)
     lista_vendas.append(nova_venda)
-    print(f"Venda realizada com sucesso! Valor da compra: R${valor_total:.2f}")
+    print(f"Venda realizada com sucesso! Valor da compra: R$ {valor_total:.2f}")
 
 
 def montar_carrinho(lista_estoque):
@@ -94,7 +96,7 @@ def montar_carrinho(lista_estoque):
                     break
                 else:
                     item["Quantidade"] += quantidade
-                    item["Subtotal"]= item["Preco_unitario"] * item["Quantidade"]
+                    item["Subtotal"]= item["Preco_Unitario"] * item["Quantidade"]
                     break
        
                 
