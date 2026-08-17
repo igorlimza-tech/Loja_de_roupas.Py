@@ -39,7 +39,13 @@ class Produto:
             return
         self.valor = preco
         
+        
+    def alterar_nome_produto(self, novo_nome_produto):
+        self.nome = novo_nome_produto    
 
+
+    def alterar_codigo(self, novo_codigo):
+        self.codigo_barras = novo_codigo
     
 def cadastrar_produtos(lista_estoque):
     codigo_barras = ler_codigo("Código: ")
@@ -71,6 +77,24 @@ def alterar_preco(lista_estoque):
     produto.alterar_preco(novo_preco)
     print("Valor alterado com sucesso!")
 
+
+def alterar_nome_produto(lista_estoque):
+    produto = selecionar_produto(lista_estoque)
+    novo_nome = ler_nome_produto("Novo nome do produto: ")
+    produto.alterar_nome_produto(novo_nome)
+    print("Nome alterado com sucesso!")
+   
+    
+def alterar_codigo(lista_estoque):
+    produto = selecionar_produto(lista_estoque)
+    
+    novo_codigo = ler_codigo("Novo código de barras: ")
+    produto_existente = busca_produto_codigo(lista_estoque, novo_codigo)
+    if produto_existente:
+        print("Produto já cadastrado!")
+        return
+    produto.alterar_codigo(novo_codigo)
+    print("Código alterado com sucesso!")
 
 def listar_estoque(lista_estoque):
     if not lista_estoque:

@@ -15,7 +15,7 @@ class Cliente:
         linha()
         
     
-    def alterar_nome(self, novo_nome):
+    def alterar_nome_cliente(self, novo_nome):
         self.nome = novo_nome
         
         
@@ -59,7 +59,7 @@ def busca_cliente_cpf(lista_clientes, cpf):
     return None
 
 
-def alterar_nome(lista_clientes):
+def alterar_nome_cliente(lista_clientes):
     cpf = ler_cpf("CPF: ")
     cliente = busca_cliente_cpf(lista_clientes, cpf)
     if not cliente:
@@ -67,31 +67,28 @@ def alterar_nome(lista_clientes):
         return
     
     novo_nome = ler_nome("Digite o novo nome: ")
-    cliente.alterar_nome(novo_nome)
+    cliente.alterar_nome_cliente(novo_nome)
     print("Nome alterado com sucesso!")
    
 
 def alterar_data(lista_clientes):
     cpf = ler_cpf("CPF: ")
     cliente = busca_cliente_cpf(lista_clientes, cpf)
-
     if not cliente:
-        print("Nenhum cliente encontrado!")
+        print("Nenhum cliente encontrado!")   
         return
-
     nova_data = ler_data("Digite a nova data de nascimento: ")
     cliente.alterar_data(nova_data)
-    print("Data de nascimento alterada com sucesso!")
+    print("Nova data alterada com sucesso!")
 
 
 def alterar_telefone(lista_clientes):
-    cpf = ler_cpf("CPF: ")
+    cpf = ler_cpf("CPF: ") 
     cliente = busca_cliente_cpf(lista_clientes, cpf)
-
     if not cliente:
-        print("Nenhum cliente encontrado!")
+        print("Nenhum cliente cadastrado!")
         return
 
-    novo_telefone = ler_telefone("Digite o novo telefone: ")
+    novo_telefone = ler_telefone("Novo telefone: ")
     cliente.alterar_telefone(novo_telefone)
-    print("Telefone alterado com sucesso!")    
+    print("Telefone alterado com sucesso!")
