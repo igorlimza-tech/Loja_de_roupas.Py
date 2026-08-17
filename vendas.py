@@ -16,8 +16,7 @@ class Venda():
         print(f"Cliente: {self.cliente.nome}")
         linha()
         for item in self.itens:
-            produto = item["Produto"]
-            print(f'Produto: {produto.nome}')
+            print(f'Produto: {item["Nome_Produto"]}')
             print(f'Valor Unitário: R$ {item["Preco_Unitario"]:.2f}')
             print(f'Quantidade: {item["Quantidade"]}')
             print(f'Subtotal: R$ {item["Subtotal"]:.2f}')
@@ -94,6 +93,7 @@ def montar_carrinho(lista_estoque):
         
         if not produto_existe:                    
             item = {"Produto": produto,
+                    "Nome_Produto": produto.nome,
                     "Quantidade": quantidade,
                     "Preco_Unitario": produto.valor,
                     "Subtotal": produto.valor * quantidade }
